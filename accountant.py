@@ -31,7 +31,7 @@ while True:
         print("Wprowadź ilość sztuk:")
         ilosc_sztuk = int(input())
         zakup = cena_jedn * ilosc_sztuk
-        print(zakup)
+        #print(zakup)
         saldo -= zakup
         print("Saldo wynosi teraz: {}".format(saldo))
         if saldo < 0:
@@ -55,14 +55,15 @@ while True:
                 print("Potwierdzam wprowadzenie zakupu -> identyfikator: {}, "
                       "cena jednostki: {}, sztuk: {}."
                       .format(identifykator, cena_jedn, ilosc_sztuk))
-                print("...ILOŚĆ RASPBERRY TERAZ: {}".format(ilosc_sztuk))
+                #print("...ILOŚĆ RASPBERRY TERAZ: {}".format(ilosc_sztuk))
             else:
                 magazyn[0][2] += ilosc_sztuk
                 print("Potwierdzam wprowadzenie zakupu -> identyfikator: {}, "
                       "cena jednostki: {}, sztuk: {}."
                       .format(identifykator, cena_jedn, ilosc_sztuk))
-                print("ILOŚĆ RASPBERRY TERAZ: {}".format(magazyn[0][2]))
+                #print("ILOŚĆ RASPBERRY TERAZ: {}".format(magazyn[0][2]))
             print("Saldo wynosi teraz: {}".format(saldo))
+        konto.append([akcja, identifykator, cena_jedn, ilosc_sztuk])
     elif akcja == "sprzedaz":
         print("Wprowadź identyfikator:")
         identifykator = str(input())
@@ -71,7 +72,7 @@ while True:
         print("Wprowadź ilość sztuk:")
         ilosc_sztuk = int(input())
         sprzedaz = cena_jedn * ilosc_sztuk
-        print(sprzedaz)
+        #print(sprzedaz)
         saldo += sprzedaz
         if saldo < 0:
             print("Saldo nie może wynosić mniej niż 0! "
@@ -80,13 +81,28 @@ while True:
             continue
         elif identifykator == "raspberry":
             magazyn[0][2] -= ilosc_sztuk
-            print("ILOŚĆ RASPBERRY TERAZ: {}".format(magazyn[0][2]))
+            print("Potwierdzam wprowadzenie sprzedaży -> identyfikator: {},"
+                  "cena jednostki: {}, sztuk: {}."
+                  .format(identifykator, cena_jedn, ilosc_sztuk))
+            print("Saldo wynosi teraz: {}".format(saldo))
+            #print("ILOŚĆ RASPBERRY TERAZ: {}".format(magazyn[0][2]))
         else:
             magazyn.append([identifykator, cena_jedn, ilosc_sztuk])
             print("Potwierdzam wprowadzenie sprzedaży -> identyfikator: {},"
                   "cena jednostki: {}, sztuk: {}."
                   .format(identifykator, cena_jedn, ilosc_sztuk))
             print("Saldo wynosi teraz: {}".format(saldo))
+        konto.append([akcja, identifykator, cena_jedn, ilosc_sztuk])
+    elif akcja == "konto":
+        print("\nHistoria konta:")
+        for element in konto:
+            print(element)
+        break
+    elif akcja == "magazyn":
+        print("\nStan magazynu:")
+        for element in magazyn:
+            print(magazyn[0][0], magazyn[0][2])
+        break
     elif akcja == "stop":
         print("Koniec wprowadzania danych")
         break
@@ -94,10 +110,10 @@ while True:
         print("Wprowadzono nieprawidłową komendę!")
         break
 
-print("\nHistoria konta:")
-for element in konto:
-    print(element)
+#print("\nHistoria konta:")
+#for element in konto:
+#    print(element)
 
-print("\nStan magazynu:")
-for element in magazyn:
-    print(magazyn)
+#print("\nStan magazynu:")
+#for element in magazyn:
+#    print(magazyn)
