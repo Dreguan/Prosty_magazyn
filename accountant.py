@@ -99,9 +99,9 @@ while True:
             print("{}: {}".format(identifykator, ilosc_sztuk))
         break
 
-    if sys.argv[2] == "przeglad":
+    if sys.argv[1] == "przeglad":
         print("\nHistoria konta:")
-        for wpis in konto:
+        for wpis in log:
             for element in wpis:
                 print(element)
         break
