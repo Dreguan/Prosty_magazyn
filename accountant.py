@@ -1,17 +1,16 @@
+import sys
+
 saldo = 0
-konto = []
+log = []
 magazyn = {}
 
 while True:
-    print("Wprowadź komendę:")
     akcja = input()
     if not akcja:
         break
     if akcja == "saldo":
-        print("Wprowadź kwotę w groszach:")
         kwota = int(input())
         saldo += kwota
-        print("Wprowadź komentarz:")
         komentarz = str(input())
         if saldo < 0:
             print(
@@ -21,23 +20,18 @@ while True:
             )
             continue
         else:
-            konto.append([akcja, kwota, komentarz])
+            log.append([akcja, kwota, komentarz])
             print(
                 "Potwierdzam wprowadzenie salda -> kwota: {}, komentarz: {}."
                 .format(kwota, komentarz)
             )
-            print("Saldo wynosi teraz: {}".format(saldo))
-    elif akcja == "zakup":
-        print("Wprowadź identyfikator:")
+        continue
+    if akcja == "zakup":
         identifykator = str(input())
-        print("Wprowadź cenę jednostkową w groszach:")
         cena_jedn = int(input())
-        print("Wprowadź ilość sztuk:")
         ilosc_sztuk = int(input())
         zakup = cena_jedn * ilosc_sztuk
-        #print(zakup)
         saldo -= zakup
-        print("Saldo wynosi teraz: {}".format(saldo))
         if saldo < 0:
             print(
                 "Saldo nie może wynosić mniej niż 0! "
@@ -57,7 +51,7 @@ while True:
             )
             continue
         else:
-            konto.append([akcja, identifykator, cena_jedn, ilosc_sztuk])
+            log.append([akcja, identifykator, cena_jedn, ilosc_sztuk])
             print(
                 "Potwierdzam wprowadzenie zakupu -> identyfikator: {}, "
                 "cena jednostki: {}, sztuk: {}."
@@ -66,15 +60,12 @@ while True:
             if identifykator not in magazyn:
                 magazyn[identifykator] = 0
             magazyn[identifykator] += ilosc_sztuk
-    elif akcja == "sprzedaz":
-        print("Wprowadź identyfikator:")
+        continue
+    if akcja == "sprzedaz":
         identifykator = str(input())
-        print("Wprowadź cenę jednostkową w groszach:")
         cena_jedn = int(input())
-        print("Wprowadź ilość sztuk:")
         ilosc_sztuk = int(input())
         sprzedaz = cena_jedn * ilosc_sztuk
-        #print(sprzedaz)
         saldo += sprzedaz
         if cena_jedn < 0 or ilosc_sztuk < 0:
             if cena_jedn < 0:
@@ -88,7 +79,7 @@ while True:
             )
             continue
         else:
-            konto.append([akcja, identifykator, cena_jedn, ilosc_sztuk])
+            log.append([akcja, identifykator, cena_jedn, ilosc_sztuk])
             if identifykator not in magazyn:
                 print("Nie ma takiego produktu w magazynie!")
             print(
@@ -97,24 +88,36 @@ while True:
                     .format(identifykator, cena_jedn, ilosc_sztuk)
             )
             magazyn[identifykator] -= ilosc_sztuk
-    elif akcja == "stop":
-        print("Koniec wprowadzania danych")
+        continue
+
+    elif sys.argv[1] == "magazyn":
+        for identifykator in sys.argv[2:]:
+            if identifykator in magazyn:
+                stan_magazynu = magazyn[identifykator]
+            else:
+                stan_magazynu = 0
+            print("{}: {}".format(identifykator, ilosc_sztuk))
         break
-    else:
-        print("Wprowadzono nieprawidłową komendę!")
-        break
-'''
-    elif akcja == "przeglad":
+
+    if sys.argv[2] == "przeglad":
         print("\nHistoria konta:")
         for wpis in konto:
             for element in wpis:
                 print(element)
         break
+
     elif akcja == "konto":
         print(saldo)
         break
-'''
 
-print("\n {}".format(saldo))
-print("\n {}".format(konto))
-print("\n {}".format(magazyn))
+    if akcja == "stop":
+        print("Koniec wprowadzania danych")
+        break
+
+    else:
+        print("Wprowadzono nieprawidłową komendę!")
+        break
+
+# print("\n {}".format(saldo))
+# print("\n {}".format(log))
+# print("\n {}".format(magazyn))
