@@ -1,3 +1,5 @@
+plik = open("in.txt")
+
 import sys
 
 saldo = 0
@@ -5,13 +7,13 @@ log = []
 magazyn = {}
 
 while True:
-    akcja = input()
+    akcja = plik.readline().strip()
     if not akcja:
         break
     if akcja == "saldo":
-        kwota = int(input())
+        kwota = int(plik.readline())
         saldo += kwota
-        komentarz = str(input())
+        komentarz = str(plik.readline())
         if saldo < 0:
             print(
                 "Saldo nie może wynosić mniej niż 0! "
@@ -22,10 +24,11 @@ while True:
         else:
             log.append([akcja, kwota, komentarz])
         continue
+
     if akcja == "zakup":
-        identifykator = str(input())
-        cena_jedn = int(input())
-        ilosc_sztuk = int(input())
+        identifykator = str(plik.readline())
+        cena_jedn = int(plik.readline())
+        ilosc_sztuk = int(plik.readline())
         zakup = cena_jedn * ilosc_sztuk
         saldo -= zakup
         if saldo < 0:
@@ -52,10 +55,11 @@ while True:
                 magazyn[identifykator] = 0
             magazyn[identifykator] += ilosc_sztuk
         continue
+
     if akcja == "sprzedaz":
-        identifykator = str(input())
-        cena_jedn = int(input())
-        ilosc_sztuk = int(input())
+        identifykator = str(plik.readline())
+        cena_jedn = int(plik.readline())
+        ilosc_sztuk = int(plik.readline())
         sprzedaz = cena_jedn * ilosc_sztuk
         saldo += sprzedaz
         if cena_jedn < 0 or ilosc_sztuk < 0:
@@ -75,6 +79,7 @@ while True:
                 print("Nie ma takiego produktu w magazynie!")
             magazyn[identifykator] -= ilosc_sztuk
         continue
+
 
     if sys.argv[1] == "zakup":
         akcja = sys.argv[1]
@@ -166,3 +171,5 @@ while True:
 
     else:
         print("Wprowadzono nieprawidłową komendę!")
+
+plik.close()
