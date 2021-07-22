@@ -58,6 +58,28 @@ class Program:
         else:
             self.magazyn[identyfikator] -= ilosc_sztuk
 
+    def sprzedaz_argv(self, identyfikator, cena_jedn, ilosc_sztuk):
+        sprzedaz = cena_jedn * ilosc_sztuk
+        self.saldo += sprzedaz
+        if cena_jedn < 0 or ilosc_sztuk < 0:
+            if cena_jedn < 0:
+                bledne_pole = "cena jednostkowa"
+            elif ilosc_sztuk < 0:
+                bledne_pole = "ilość sztuk"
+            print(
+                "{} nie może wynosić mniej niż 0! "
+                "Wprowadzone saldo -> kwota: {}, komentarz: {} "
+                "<- zostaje pominięte!".format(bledne_pole, cena_jedn, identyfikator)
+            )
+        else:
+            self.log.append(["sprzedaz", identyfikator, cena_jedn, ilosc_sztuk])
+            if identyfikator not in self.magazyn:
+                print("Nie ma takiego produktu w magazynie!")
+            if self.magazyn[identyfikator] - ilosc_sztuk < 0:
+                print("Nie wystarczająca ilość {} na magazynie!".format(identyfikator))
+            else:
+                self.magazyn[identyfikator] -= ilosc_sztuk
+
     def przeglad(self):
         print("\nHistoria konta:")
         for wpis in self.log:
