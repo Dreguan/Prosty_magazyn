@@ -36,13 +36,6 @@ class Program:
             self.magazyn[identyfikator] = 0
         self.magazyn[identyfikator] += ilosc_sztuk
 
-        '''
-        for wpis in self.log:
-            for element in wpis:
-                print(element)
-            return True
-        '''
-
     def sprzedaz(self, identyfikator, cena_jedn, ilosc_sztuk):
         sprzedaz = cena_jedn * ilosc_sztuk
         self.saldo += sprzedaz
@@ -58,17 +51,12 @@ class Program:
             )
             return False
         self.log.append(["sprzedaz", identyfikator, cena_jedn, ilosc_sztuk])
-
-        '''
-        if identyfikator not in magazyn:
+        if identyfikator not in self.magazyn:
             print("Nie ma takiego produktu w magazynie!")
-        magazyn[identifykator] -= ilosc_sztuk
-    for wpis in log:
-        for element in wpis:
-            print(element)
-    continue
-        '''
-
+        if self.magazyn[identyfikator] - ilosc_sztuk < 0:
+            print("Nie wystarczająca ilość {} na magazynie!".format(identyfikator))
+        else:
+            self.magazyn[identyfikator] -= ilosc_sztuk
 
     def przeglad(self):
         print("\nHistoria konta:")

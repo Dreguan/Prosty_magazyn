@@ -59,15 +59,6 @@ with open ("in.txt") as plik:
             for element in wpis:
                 print(element)
         continue
-
-    if sys.argv[1] == "magazyn":
-        for identifykator in sys.argv[2:]:
-            if identifykator in magazyn:
-                stan_magazynu = magazyn[identifykator]
-            else:
-                stan_magazynu = 0
-            print("{}: {}".format(identifykator, stan_magazynu))
-        break
 '''
 
 
@@ -80,3 +71,4 @@ if sys.argv[1] == "przeglad":
 
 if sys.argv[1] == "konto":
     program.konto()
+
