@@ -32,11 +32,16 @@ with open ("in.txt") as plik:
             break
 
 if sys.argv[1] == "sprzedaz":
-    akcja = sys.argv[1]
-    identifykator = str(sys.argv[2])
+    identyfikator = str(sys.argv[2])
     cena_jedn = int(sys.argv[3])
     ilosc_sztuk = int(sys.argv[4])
-    program.sprzedaz_argv(identifykator, cena_jedn, ilosc_sztuk)
+    program.sprzedaz(identyfikator, cena_jedn, ilosc_sztuk)
+
+if sys.argv[1] == "zakup":
+    identyfikator = str(sys.argv[2])
+    cena_jedn = int(sys.argv[3])
+    ilosc_sztuk = int(sys.argv[4])
+    program.zakup(identyfikator, cena_jedn, ilosc_sztuk)
 
 if sys.argv[1] == "magazyn":
     for identyfikator in sys.argv[2:]:
