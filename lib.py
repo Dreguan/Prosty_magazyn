@@ -7,12 +7,13 @@ class Program:
         self.log = []
 
     def zmiana_salda(self, kwota, komentarz):
-        if self.saldo + kwota < 0:
-            print("Za mało środków na koncie.")
-            return False
-        self.saldo += kwota
-        self.log.append(["saldo", kwota, komentarz])
-        return True
+        with open(sys.argv[1], "r") as plik:
+            if self.saldo + kwota < 0:
+                print("Za mało środków na koncie.")
+                return False
+            self.saldo += kwota
+            self.log.append(["saldo", kwota, komentarz])
+            return True
 
     def zakup(self, identyfikator, cena_jedn, ilosc_sztuk):
         zakup = cena_jedn * ilosc_sztuk
@@ -68,6 +69,7 @@ class Program:
     def konto(self):
         print("Konto: {}".format(self.saldo))
 
+
     def magazyn_log(self, identyfikator):
         if identyfikator in self.magazyn:
             self.stan_magazynu = self.magazyn[identyfikator]
@@ -76,7 +78,7 @@ class Program:
         print("{}: {}".format(identyfikator, self.stan_magazynu))
 
     def zapis(self, plik):
-        with open(sys.argv[1], "w") as plik:
+        with open(sys.argv[1], "a+") as plik:
             for wpis in self.log:
                 for element in wpis:
                     plik.write(str(element) + "\n")
