@@ -74,3 +74,17 @@ class Program:
         else:
             self.stan_magazynu = 0
         print("{}: {}".format(identyfikator, self.stan_magazynu))
+
+    def zapis(self, plik):
+        with open(sys.argv[1], "w") as plik:
+            for wpis in self.log:
+                for element in wpis:
+                    plik.write(str(element) + "\n")
+
+    def wczytanie(self, plik):
+        with open(sys.argv[1], "r") as plik:
+            while True:
+                self.linia = plik.readline()
+                if not self.linia:
+                    break
+                self.linia = self.linia.rstrip()
