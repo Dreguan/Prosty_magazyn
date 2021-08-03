@@ -7,4 +7,5 @@ from lib import Program
 program = Program()
 
 program.wczytanie(sys.argv[1])
-program.magazyn_log(sys.argv[2:])
+for identyfikator in sys.argv[2:]:
+    program.magazyn_log(identyfikator)
