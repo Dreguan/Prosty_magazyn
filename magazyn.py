@@ -1,4 +1,4 @@
-# python magazyn.py in.txt raspberry jason
+# python magazyn.py in.txt raspberry jetson
 
 import sys
 

@@ -1,4 +1,5 @@
 import sys
+#import accountant #pokazuje błąd w accountant
 
 class Program:
     def __init__(self):
@@ -78,15 +79,36 @@ class Program:
         print("{}: {}".format(identyfikator, self.stan_magazynu))
 
     def zapis(self, plik):
-        with open(sys.argv[1], "a+") as plik:
+        with open(sys.argv[1], "w") as plik:
             for wpis in self.log:
                 for element in wpis:
                     plik.write(str(element) + "\n")
+            plik.write("stop\n")
 
     def wczytanie(self, plik):
-        with open(sys.argv[1], "r") as plik:
+        with open(plik, "r") as plik:
             while True:
-                self.linia = plik.readline()
-                if not self.linia:
+                akcja = plik.readline().rstrip()
+
+                if not akcja:
                     break
-                self.linia = self.linia.rstrip()
+
+                if akcja == "saldo":
+                    kwota = int(plik.readline())
+                    komentarz = str(plik.readline().rstrip())
+                    self.zmiana_salda(kwota, komentarz)
+
+                if akcja == "sprzedaz":
+                    identyfikator = str(plik.readline().rstrip())
+                    cena_jedn = int(plik.readline())
+                    ilosc_sztuk = int(plik.readline())
+                    self.sprzedaz(identyfikator, cena_jedn, ilosc_sztuk)
+
+                if akcja == "zakup":
+                    identyfikator = str(plik.readline().rstrip())
+                    cena_jedn = int(plik.readline())
+                    ilosc_sztuk = int(plik.readline())
+                    self.zakup(identyfikator, cena_jedn, ilosc_sztuk)
+
+                if akcja == "stop":
+                    break
