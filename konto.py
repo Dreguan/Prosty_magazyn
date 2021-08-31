@@ -1,6 +1,6 @@
 # python konto.py
 
-from accountant import manager
+from app import manager
 
 manager.process()
 print(manager.account)

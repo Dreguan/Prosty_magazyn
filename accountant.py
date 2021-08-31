@@ -39,3 +39,7 @@ def przeglad(manager, rows):
     for row in manager.review(rows[0], rows[1]):
         print("\n".join(row))
 
+try:
+    manager.process()
+except NotEnoughDataException as exc:
+    print(exc)
