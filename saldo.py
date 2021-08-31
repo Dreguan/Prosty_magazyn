@@ -1,11 +1,9 @@
-# python saldo.py in.txt 5000 "wplata wlasna"
+# python saldo.py 5000 "wplata wlasna"
 
 import sys
+from accountant import manager
 
-from lib import Program
-
-program = Program()
-
-program.wczytanie(sys.argv[1])
-program.zmiana_salda(int(sys.argv[2]), str(sys.argv[3]))
-program.zapis(str(sys.argv[1]))
+manager.process()
+manager.process_action("saldo", sys.argv[1:])
+print(manager.account)
+manager.save()

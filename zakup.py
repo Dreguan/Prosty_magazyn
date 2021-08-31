@@ -1,11 +1,8 @@
-# python zakup.py in.txt raspberry 15000 4
+# python zakup.py raspberry 15000 4
 
 import sys
+from accountant import manager
 
-from lib import Program
-
-program = Program()
-
-program.wczytanie(sys.argv[1])
-program.zakup(sys.argv[2], int(sys.argv[3]), int(sys.argv[4]))
-program.zapis(sys.argv[1])
+manager.process()
+manager.process_action("zakup", sys.argv[1:])
+manager.save()

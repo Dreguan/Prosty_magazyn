@@ -1,9 +1,6 @@
-# python konto.py in.txt
+# python konto.py
 
-import sys
+from accountant import manager
 
-from lib import Program
-
-program = Program()
-program.wczytanie(sys.argv[1])
-program.konto()
+manager.process()
+print(manager.account)

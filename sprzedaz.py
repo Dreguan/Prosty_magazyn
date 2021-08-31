@@ -1,11 +1,9 @@
-# python sprzedaz.py in.txt raspberry 25000 2
+# python sprzedaz.py raspberry 25000 2
 
 import sys
+from accountant import manager
 
-from lib import Program
+manager.process()
+manager.process_action("sprzedaz", sys.argv[1:])
+manager.save()
 
-program = Program()
-
-program.wczytanie(sys.argv[1])
-program.sprzedaz(sys.argv[2], int(sys.argv[3]), int(sys.argv[4]))
-program.zapis(sys.argv[1])

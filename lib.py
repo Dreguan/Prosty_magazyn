@@ -1,5 +1,6 @@
 import sys
-#import accountant #pokazuje błąd w accountant
+
+program = Program()
 
 class Program:
     def __init__(self):
@@ -7,6 +8,7 @@ class Program:
         self.magazyn = {}
         self.log = []
 
+    @program.zmiana_salda(int(sys.argv[2]), str(sys.argv[3]))
     def zmiana_salda(self, kwota, komentarz):
         with open(sys.argv[1], "r") as plik:
             if self.saldo + kwota < 0:
@@ -60,7 +62,6 @@ class Program:
         else:
             self.magazyn[identyfikator] -= ilosc_sztuk
 
-
     def przeglad(self):
         print("\nHistoria konta:")
         for wpis in self.log:
@@ -69,7 +70,6 @@ class Program:
 
     def konto(self):
         print("Konto: {}".format(self.saldo))
-
 
     def magazyn_log(self, identyfikator):
         if identyfikator in self.magazyn:

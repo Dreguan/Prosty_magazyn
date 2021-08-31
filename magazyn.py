@@ -1,11 +1,7 @@
-# python magazyn.py in.txt raspberry jetson
+# python magazyn.py raspberry jetson
 
 import sys
+from accountant import manager
 
-from lib import Program
-
-program = Program()
-
-program.wczytanie(sys.argv[1])
-for identyfikator in sys.argv[2:]:
-    program.magazyn_log(identyfikator)
+manager.process()
+manager.process_action("magazyn", sys.argv[1:])
